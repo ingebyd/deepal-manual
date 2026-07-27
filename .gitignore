@@ -4,3 +4,4 @@ node_modules
 S09_manual.html
 S09_manual_ru.html.bak
 img_originals
+.env*

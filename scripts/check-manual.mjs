@@ -3,7 +3,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const manualPath = resolve(projectRoot, "S09_manual_ru.html");
+const manualPath = resolve(projectRoot, "index.html");
 const html = await readFile(manualPath, "utf8");
 
 const requiredMarkers = [

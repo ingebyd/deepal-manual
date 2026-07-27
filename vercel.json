@@ -1,12 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
-  "rewrites": [
-    {
-      "source": "/",
-      "destination": "/S09_manual_ru.html"
-    }
-  ],
   "headers": [
     {
       "source": "/img/(.*)",
@@ -22,7 +16,7 @@
       ]
     },
     {
-      "source": "/S09_manual_ru.html",
+      "source": "/index.html",
       "headers": [
         {
           "key": "Cache-Control",
