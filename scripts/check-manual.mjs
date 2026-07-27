@@ -22,6 +22,8 @@ for (const marker of requiredMarkers) {
 
 const imageSources = [...html.matchAll(/<img\b[^>]*\bsrc="([^"]+)"/gi)].map((match) => match[1]);
 const lazyImages = [...html.matchAll(/<img\b[^>]*\bloading="lazy"[^>]*>/gi)].length;
+const tocTargets = [...html.matchAll(/href="#(chapter-\d+)"/g)].map((match) => match[1]);
+const chapterIds = [...html.matchAll(/<article class="chapter" id="(chapter-\d+)"/g)].map((match) => match[1]);
 const missingImages = [];
 
 for (const source of new Set(imageSources)) {
@@ -45,6 +47,18 @@ if (missingImages.length > 0) {
 
 if (lazyImages !== imageSources.length) {
   throw new Error(`Lazy loading is configured for ${lazyImages} of ${imageSources.length} images`);
+}
+
+if (tocTargets.length !== new Set(tocTargets).size) {
+  throw new Error("The table of contents contains duplicate chapter targets");
+}
+
+if (chapterIds.length !== new Set(chapterIds).size) {
+  throw new Error("The manual contains duplicate chapter IDs");
+}
+
+if (tocTargets.length !== chapterIds.length || tocTargets.some((target, index) => target !== chapterIds[index])) {
+  throw new Error("The table of contents does not match the chapter sequence");
 }
 
 console.log(`Manual check passed: ${chapterCount} chapters, ${imageSources.length} image references.`);

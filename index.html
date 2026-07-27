@@ -24,7 +24,7 @@
       font-family: Inter, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
     }
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; background: var(--surface); }
+    html { scroll-behavior: auto; background: var(--surface); }
     body {
       margin: 0; min-height: var(--tg-viewport-stable-height, 100vh); color: var(--ink);
       background: var(--surface); line-height: 1.75; -webkit-tap-highlight-color: transparent;
@@ -35,8 +35,15 @@
     .sidebar {
       position: sticky; top: 0; height: 100vh; overflow: auto; padding: 24px 20px;
       background: var(--panel); border-right: 1px solid var(--line);
-      overscroll-behavior: contain;
+      overscroll-behavior: contain; color-scheme: light;
+      scrollbar-width: thin; scrollbar-color: #c7cdd4 var(--panel);
     }
+    .sidebar::-webkit-scrollbar { width: 10px; }
+    .sidebar::-webkit-scrollbar-track { background: var(--panel); }
+    .sidebar::-webkit-scrollbar-thumb {
+      background: #c7cdd4; border: 3px solid var(--panel); border-radius: 999px;
+    }
+    .sidebar::-webkit-scrollbar-thumb:hover { background: #aeb7c1; }
     .brand { margin-bottom: 18px; }
     .brand strong { display: block; font-size: 1.25rem; }
     .brand span { color: var(--muted); font-size: .88rem; }
@@ -60,10 +67,7 @@
     .cover h1 { margin: .15em 0; font-size: clamp(2.4rem, 7vw, 5.2rem); line-height: 1.05; }
     .cover p { max-width: 56ch; color: var(--muted); font-size: 1.05rem; }
     .manual { max-width: 920px; margin: auto; }
-    .chapter {
-      scroll-margin-top: 24px; padding: 8px 0 42px;
-      content-visibility: auto; contain-intrinsic-size: auto 900px;
-    }
+    .chapter { scroll-margin-top: 24px; padding: 8px 0 42px; }
     .chapter[hidden] { display: none; }
     .path-heading { line-height: 1.25; }
     h1.path-heading { margin: 70px 0 22px; padding-bottom: 14px; border-bottom: 2px solid var(--ink); font-size: 2rem; }
