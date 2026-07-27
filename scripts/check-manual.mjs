@@ -21,6 +21,7 @@ for (const marker of requiredMarkers) {
 }
 
 const imageSources = [...html.matchAll(/<img\b[^>]*\bsrc="([^"]+)"/gi)].map((match) => match[1]);
+const lazyImages = [...html.matchAll(/<img\b[^>]*\bloading="lazy"[^>]*>/gi)].length;
 const missingImages = [];
 
 for (const source of new Set(imageSources)) {
@@ -40,6 +41,10 @@ if (chapterCount === 0) {
 
 if (missingImages.length > 0) {
   throw new Error(`Missing images:\n${missingImages.join("\n")}`);
+}
+
+if (lazyImages !== imageSources.length) {
+  throw new Error(`Lazy loading is configured for ${lazyImages} of ${imageSources.length} images`);
 }
 
 console.log(`Manual check passed: ${chapterCount} chapters, ${imageSources.length} image references.`);
