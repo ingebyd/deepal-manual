@@ -1,0 +1,6 @@
+node_modules
+.vercel
+.DS_Store
+S09_manual.html
+S09_manual_ru.html.bak
+img_originals
